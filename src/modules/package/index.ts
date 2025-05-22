@@ -1,0 +1,17 @@
+import { BaseModule, ModuleRegistry } from '../../framework';
+import { cwd, readFile, updateJson } from '../../utils';
+
+export class PackageModule extends BaseModule {
+	protected autoInstallDeps = true;
+
+	constructor(registry: ModuleRegistry) {
+		super(registry);
+		registry.register(PackageModule, this);
+	}
+
+	public async setup(): Promise<void> {
+		const newJson = JSON.parse(readFile('./package.json'));
+		this.logger.info(`adding [${Object.keys(newJson).join(',')}] properties to package.json`);
+		await updateJson(cwd('package.json'), newJson);
+	}
+}

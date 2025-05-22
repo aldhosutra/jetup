@@ -1,0 +1,55 @@
+{
+	"esLint": {
+		"installedIfDepsExists": ["@eslint/js", "eslint", "typescript-eslint"],
+		"installedIfFilesOrFoldersExists": ["eslint.config.mjs"]
+	},
+	"husky": {
+		"installedIfDepsExists": ["husky"],
+		"installedIfFilesOrFoldersExists": [".husky"]
+	},
+	"jest": {
+		"installedIfDepsExists": ["@types/jest", "jest", "jest-extended", "jest-junit", "ts-jest"],
+		"installedIfFilesOrFoldersExists": [
+			"test",
+			"test/_setup.js",
+			"test/unit/index.spec.ts",
+			"jest.config.js"
+		]
+	},
+	"lintStaged": {
+		"installedIfDepsExists": ["lint-staged"],
+		"installedIfFilesOrFoldersExists": []
+	},
+	"package": {
+		"installedIfDepsExists": [
+			"@types/jest",
+			"husky",
+			"jest",
+			"jest-extended",
+			"jest-junit",
+			"lint-staged@15.5.2",
+			"prettier",
+			"ts-jest",
+			"tslib",
+			"typescript",
+			"typescript-eslint"
+		],
+		"installedIfFilesOrFoldersExists": []
+	},
+	"prettier": {
+		"installedIfDepsExists": ["prettier"],
+		"installedIfFilesOrFoldersExists": [".prettierignore", ".prettierrc"]
+	},
+	"project": {
+		"installedIfDepsExists": [],
+		"installedIfFilesOrFoldersExists": ["package.json"]
+	},
+	"src": {
+		"installedIfDepsExists": [],
+		"installedIfFilesOrFoldersExists": ["src/index.ts"]
+	},
+	"typescript": {
+		"installedIfDepsExists": ["typescript", "typescript-eslint"],
+		"installedIfFilesOrFoldersExists": ["tsconfig.json"]
+	}
+}
