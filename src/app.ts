@@ -1,4 +1,4 @@
-import figlet from 'figlet';
+import * as figlet from 'figlet';
 import { ConfigModule, LoggerModule, ModuleRegistry } from './framework';
 import {
 	EsLintModule,

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { TsSetupApp } from './app';
 
 async function main() {

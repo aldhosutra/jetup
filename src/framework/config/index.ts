@@ -1,4 +1,5 @@
-import { BaseNamedModule, ModuleRegistry } from '../base';
+import { ModuleRegistry } from '../base/registry';
+import { BaseNamedModule } from '../base/named';
 import config from './config';
 
 export class ConfigModule extends BaseNamedModule {

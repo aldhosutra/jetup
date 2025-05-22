@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "Set up a (TypeScript + ESLint + Prettier + Husky + Lint-Staged + Jest) project by running one command.",
 	"bin": {
-		"ts-setup": "dist/ts-setup.js"
+		"ts-setup": "dist/index.js"
 	},
 	"files": [
 		"config",

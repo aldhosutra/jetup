@@ -1,5 +1,6 @@
 import * as winston from 'winston';
-import { BaseNamedModule, ModuleRegistry } from '../base';
+import { ModuleRegistry } from '../base/registry';
+import { BaseNamedModule } from '../base/named';
 import { ConfigModule } from '../config';
 
 export class LoggerModule extends BaseNamedModule {

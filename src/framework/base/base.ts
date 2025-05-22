@@ -2,16 +2,19 @@ import { ModuleConfig } from '../../types';
 import { cwd, hasJsonProperty, isFileExists, isFolderExists, packageInstallDev } from '../../utils';
 import { ConfigModule } from '../config';
 import { LoggerModule } from '../logger';
-import { BaseNamedModule } from './named';
 import { ModuleRegistry } from './registry';
 
-export class BaseModule extends BaseNamedModule {
+export class BaseModule {
 	protected config!: ModuleConfig;
 	protected logger!: LoggerModule;
 	protected autoInstallDeps = false;
 
+	public get name(): string {
+		const name = this.constructor.name.replace('Module', '');
+		return name.charAt(0).toLowerCase() + name.substring(1);
+	}
+
 	constructor(registry: ModuleRegistry) {
-		super();
 		const configModule = registry.get(ConfigModule);
 		const config = configModule.get(this.name);
 
