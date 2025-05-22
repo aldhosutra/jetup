@@ -61,13 +61,19 @@ export class BaseModule {
 		if (this.autoInstallDeps && this.config.installedIfDepsExists.length > 0) {
 			this.logger.info(`auto installing dev dependencies of "${this.name}" module...`);
 
-			for (const deps of this.config.installedIfDepsExists) {
-				if (!hasJsonProperty(cwd('package.json'), `devDependencies.${deps}`)) {
-					this.logger.info(`installing ${deps} as devDependencies`);
-					await packageInstallDev(deps);
-				} else {
-					this.logger.info(`${deps} already installed as devDependencies`);
-				}
+			const depsExists = this.config.installedIfDepsExists.every(deps => {
+				const exists = hasJsonProperty(cwd('package.json'), `devDependencies.${deps}`);
+				this.logger.info(
+					`Dependency "${deps}" ${exists ? 'found' : 'not found'} in package.json devDependencies`,
+				);
+				return exists;
+			});
+
+			if (!depsExists) {
+				this.logger.info(
+					`installing [${this.config.installedIfDepsExists.join(', ')}] as devDependencies`,
+				);
+				await packageInstallDev(this.config.installedIfDepsExists.join(' '));
 			}
 
 			this.logger.info(`dependencies installation of "${this.name}" module completed!`);
