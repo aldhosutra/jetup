@@ -5,6 +5,14 @@
 	"bin": {
 		"ts-setup": "dist/ts-setup.js"
 	},
+	"files": [
+		"config",
+		"dist",
+		"lib",
+		"LICENSE",
+		"package.json",
+		"README.md"
+	],
 	"preferGlobal": true,
 	"scripts": {
 		"clean": "if test junit.xml; then rm junit.xml; fi; if test -d dist; then rm -r dist; fi; if test -d typedoc; then rm -r typedoc; fi; if test -d coverage; then rm -r coverage; fi; rm -rf node_modules; rm -f tsconfig.tsbuildinfo; rm -f npm-shrinkwrap.json",
