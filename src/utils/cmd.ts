@@ -1,26 +1,32 @@
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
+import { spawn } from 'child_process';
 
 /**
- * Runs a shell command asynchronously, streaming stdout/stderr
- * and resolving once the process exits.
+ * Runs a shell command asynchronously with support for interactive input/output.
  *
- * @param command - The exact shell command to execute.
+ * @param command - The full command to execute (e.g., "npm init").
  * @returns A promise that resolves when the command completes successfully,
  *          or rejects if the command exits with an error.
- *
- * @example
- * await runCommand('npm install --save-dev typescript');
  */
 export async function runCommand(command: string): Promise<void> {
-	try {
-		const { stdout, stderr } = await execAsync(command);
-		if (stdout) console.log(stdout);
-		if (stderr) console.error(stderr);
-	} catch (error) {
-		console.error(`Error running command: ${command}`);
-		throw error;
-	}
+	return new Promise((resolve, reject) => {
+		const [cmd, ...args] = command.split(' ');
+
+		const child = spawn(cmd, args, {
+			stdio: 'inherit', // Connects stdin, stdout, stderr to parent process
+			shell: true, // Runs the command through the shell
+		});
+
+		child.on('error', err => {
+			console.error(`Failed to start command: ${command}`);
+			reject(err);
+		});
+
+		child.on('close', code => {
+			if (code === 0) {
+				resolve();
+			} else {
+				reject(new Error(`Command "${command}" exited with code ${code}`));
+			}
+		});
+	});
 }
