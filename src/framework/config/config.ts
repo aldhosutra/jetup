@@ -7,7 +7,7 @@ config();
 export default merge(
 	{
 		logger: {
-			level: 'info',
+			verbose: false,
 		},
 	},
 	appConfig,

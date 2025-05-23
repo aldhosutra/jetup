@@ -31,15 +31,15 @@ export class TsSetupApp {
 		);
 
 		for (const module of selectedPreset.modules) {
-			this._logger.info(`setting up "${module.name}" module...`);
+			this._logger.start(`setting up "${module.name}" module...`);
 			module.setRegistry(this._moduleRegistry);
 
 			if (!(await module.isInstalled())) {
 				await module.installDeps();
 				await module.setup();
-				this._logger.info(`setup "${module.name}" module completed!`);
+				this._logger.end(`setup "${module.name}" module completed!`);
 			} else {
-				this._logger.info(`module "${module.name}" already installed...`);
+				this._logger.end(`module "${module.name}" already installed...`);
 			}
 		}
 

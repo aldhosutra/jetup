@@ -6,6 +6,7 @@ export class EsLintModule extends BaseModule {
 
 	public async setup(): Promise<void> {
 		this.logger.info(`executing: npm init @eslint/config@latest`);
+		this.logger.stop();
 		await runCommand('npm init @eslint/config@latest');
 	}
 }

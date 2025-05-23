@@ -7,6 +7,7 @@ export class ProjectModule extends BaseModule {
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('package.json'))) {
 			this.logger.info(`initializing npm project...`);
+			this.logger.stop();
 			await runCommand('npm init');
 		} else {
 			this.logger.info(`project already initialized!`);
