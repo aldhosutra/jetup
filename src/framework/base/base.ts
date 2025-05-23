@@ -1,5 +1,12 @@
 import { ModuleConfig } from '../../types';
-import { cwd, hasJsonProperty, isFileExists, isFolderExists, packageInstallDev } from '../../utils';
+import {
+	cwd,
+	getPackageName,
+	hasJsonProperty,
+	isFileExists,
+	isFolderExists,
+	packageInstallDev,
+} from '../../utils';
 import { ConfigModule } from '../config';
 import { LoggerModule } from '../logger';
 import { ModuleRegistry } from './registry';
@@ -31,9 +38,10 @@ export class BaseModule {
 		this.logger.info(`checking whether ${this.name} module is already installed...`);
 
 		depsExists = this.config.installedIfDepsExists.every(deps => {
-			const exists = hasJsonProperty(cwd('package.json'), `devDependencies.${deps}`);
+			const dep = getPackageName(deps);
+			const exists = hasJsonProperty(cwd('package.json'), `devDependencies.${dep}`);
 			this.logger.info(
-				`Dependency "${deps}" ${exists ? 'found' : 'not found'} in package.json devDependencies`,
+				`Dependency "${dep}" ${exists ? 'found' : 'not found'} in package.json devDependencies`,
 			);
 			return exists;
 		});
@@ -62,9 +70,10 @@ export class BaseModule {
 			this.logger.info(`auto installing dev dependencies of "${this.name}" module...`);
 
 			const depsExists = this.config.installedIfDepsExists.every(deps => {
-				const exists = hasJsonProperty(cwd('package.json'), `devDependencies.${deps}`);
+				const dep = getPackageName(deps);
+				const exists = hasJsonProperty(cwd('package.json'), `devDependencies.${dep}`);
 				this.logger.info(
-					`Dependency "${deps}" ${exists ? 'found' : 'not found'} in package.json devDependencies`,
+					`Dependency "${dep}" ${exists ? 'found' : 'not found'} in package.json devDependencies`,
 				);
 				return exists;
 			});
