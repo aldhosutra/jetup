@@ -18,7 +18,7 @@
 	},
 	"lintStaged": {
 		"installedIfDepsExists": ["lint-staged"],
-		"installedIfFilesOrFoldersExists": []
+		"installedIfFilesOrFoldersExists": [".lintstagedrc.json"]
 	},
 	"package": {
 		"installedIfDepsExists": [
