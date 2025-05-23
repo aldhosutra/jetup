@@ -70,7 +70,7 @@ export async function runCommandInSilent(command: string): Promise<void> {
  */
 export async function runCommandInAlternateScreen(command: string): Promise<void> {
 	return new Promise((resolve, reject) => {
-		enterAlternateScreen();
+		enterAlternateScreen({ header: `executing:\n${command}` });
 		const [cmd, ...args] = command.split(' ');
 
 		const child = spawn(cmd, args, {
@@ -95,10 +95,42 @@ export async function runCommandInAlternateScreen(command: string): Promise<void
 	});
 }
 
-export function enterAlternateScreen() {
+export function enterAlternateScreen(params: { title?: string; header?: string }) {
 	process.stdout.write('\x1b[?1049h');
+	if (params.title) setTerminalTitle(params.title);
+	if (params.header) drawBoxedTitle(params.header);
 }
 
 export function exitAlternateScreen() {
 	process.stdout.write('\x1b[?1049l');
+}
+
+export function setTerminalTitle(title: string) {
+	process.stdout.write(`\x1b]0;${title}\x07`);
+}
+
+function drawBoxedTitle(title: string, padding: { horizontal?: number; vertical?: number } = {}) {
+	const hPadding = padding.horizontal ?? 5;
+	const vPadding = padding.vertical ?? 1;
+
+	const rawLines = title.split('\n');
+	const contentWidth = Math.max(...rawLines.map(line => line.length)) + hPadding * 2;
+	const border = '─'.repeat(contentWidth);
+	const emptyLine = ' '.repeat(contentWidth);
+
+	const paddedLines = rawLines.map(line => {
+		const padded = ' '.repeat(hPadding) + line + ' '.repeat(hPadding);
+		return padded.padEnd(contentWidth);
+	});
+
+	const allLines = [
+		...Array(vPadding).fill(emptyLine),
+		...paddedLines,
+		...Array(vPadding).fill(emptyLine),
+	];
+
+	const boxed = [`╭${border}╮`, ...allLines.map(line => `│${line}│`), `╰${border}╯`];
+
+	console.log(boxed.join('\n'));
+	console.log();
 }
