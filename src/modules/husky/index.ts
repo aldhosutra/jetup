@@ -5,7 +5,7 @@ import {
 	cwd,
 	isFolderExists,
 	readFile,
-	runCommand,
+	runCommandInSilent,
 } from '../../utils';
 
 export class HuskyModule extends BaseModule {
@@ -15,7 +15,7 @@ export class HuskyModule extends BaseModule {
 	public async setup(): Promise<void> {
 		if (!isFolderExists(cwd('.husky'))) {
 			this.logger.info(`executing: npx husky init`);
-			await runCommand('npx husky init');
+			await runCommandInSilent('npx husky init');
 
 			this.logger.info(`modifying pre-commit file contents`);
 			await createOrReplaceFile(cwd('.husky/pre-commit'), readFile(__dirname, './pre-commit'));

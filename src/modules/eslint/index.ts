@@ -1,5 +1,5 @@
 import { BaseModule } from '../../framework';
-import { runCommand } from '../../utils';
+import { runCommandInAlternateScreen } from '../../utils';
 
 export class EsLintModule extends BaseModule {
 	protected registry = EsLintModule;
@@ -7,6 +7,6 @@ export class EsLintModule extends BaseModule {
 	public async setup(): Promise<void> {
 		this.logger.info(`executing: npm init @eslint/config@latest`);
 		this.logger.stop();
-		await runCommand('npm init @eslint/config@latest');
+		await runCommandInAlternateScreen('npm init @eslint/config@latest');
 	}
 }

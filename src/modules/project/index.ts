@@ -1,5 +1,5 @@
 import { BaseModule } from '../../framework';
-import { cwd, isFileExists, runCommand } from '../../utils';
+import { cwd, isFileExists, runCommandInAlternateScreen } from '../../utils';
 
 export class ProjectModule extends BaseModule {
 	protected registry = ProjectModule;
@@ -8,7 +8,7 @@ export class ProjectModule extends BaseModule {
 		if (!isFileExists(cwd('package.json'))) {
 			this.logger.info(`initializing npm project...`);
 			this.logger.stop();
-			await runCommand('npm init');
+			await runCommandInAlternateScreen('npm init');
 		} else {
 			this.logger.info(`project already initialized!`);
 		}

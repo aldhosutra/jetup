@@ -1,4 +1,4 @@
-import { runCommand } from './cmd';
+import { runCommandInSilent } from './cmd';
 
 /**
  * Install package as dev dependencies (using npm).
@@ -11,7 +11,7 @@ import { runCommand } from './cmd';
  * await packageInstallDev('typescript');
  */
 export async function packageInstallDev(packages: string): Promise<void> {
-	await runCommand(`npm install --save-dev ${packages}`);
+	await runCommandInSilent(`npm install --save-dev ${packages}`);
 }
 
 /**
