@@ -161,16 +161,15 @@ export function isFolderExists(pattern: string): boolean {
 /**
  * Reads and returns the content of a file synchronously.
  *
- * @param filePath - Path to the file to read.
- * @param encoding - Character encoding to use (default: 'utf-8').
+ * @param filePath - One or more path segments under the user's working directory.
  * @returns The file content as a string.
  *
  * @example
  * const template = readFile('templates/README.tpl.md');
  * await createOrReplaceFile('README.md', template);
  */
-export function readFile(filePath: string, encoding: BufferEncoding = 'utf-8'): string {
-	return readFileSync(filePath, { encoding });
+export function readFile(...filePath: string[]): string {
+	return readFileSync(resolve(...filePath), { encoding: 'utf-8' });
 }
 
 /**

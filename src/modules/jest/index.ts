@@ -12,14 +12,14 @@ export class JestModule extends BaseModule {
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('test/_setup.js'))) {
 			this.logger.info(`creating test/_setup.js file...`);
-			await createOrReplaceFile(cwd('test/_setup.js'), readFile('./_setup.js'));
+			await createOrReplaceFile(cwd('test/_setup.js'), readFile(__dirname, './_setup.js'));
 		} else {
 			this.logger.info(`test/_setup.js already exists`);
 		}
 
 		if (!isFileExists(cwd('jest.config.js'))) {
 			this.logger.info(`creating jest.config.js file...`);
-			await createOrReplaceFile(cwd('jest.config.js'), readFile('./jest.config.js'));
+			await createOrReplaceFile(cwd('jest.config.js'), readFile(__dirname, './jest.config.js'));
 		} else {
 			this.logger.info(`jest.config.js already exists`);
 		}

@@ -12,14 +12,14 @@ export class PrettierModule extends BaseModule {
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('.prettierignore'))) {
 			this.logger.info(`creating .prettierignore file...`);
-			await createOrReplaceFile(cwd('.prettierignore'), readFile('./.prettierignore'));
+			await createOrReplaceFile(cwd('.prettierignore'), readFile(__dirname, './.prettierignore'));
 		} else {
 			this.logger.info(`.prettierignore already exists`);
 		}
 
 		if (!isFileExists(cwd('.prettierrc'))) {
 			this.logger.info(`creating .prettierrc file...`);
-			await createOrReplaceFile(cwd('.prettierrc'), readFile('./.prettierrc'));
+			await createOrReplaceFile(cwd('.prettierrc'), readFile(__dirname, './.prettierrc'));
 		} else {
 			this.logger.info(`.prettierrc already exists`);
 		}
