@@ -1,13 +1,9 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import { createOrReplaceFile, cwd, isFileExists } from '../../utils';
 
 export class SrcModule extends BaseModule {
 	protected autoInstallDeps = true;
-
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(SrcModule, this);
-	}
+	protected registry = SrcModule;
 
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('src/index.ts'))) {

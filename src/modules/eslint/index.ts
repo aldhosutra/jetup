@@ -1,11 +1,8 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import { runCommand } from '../../utils';
 
 export class EsLintModule extends BaseModule {
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(EsLintModule, this);
-	}
+	protected registry = EsLintModule;
 
 	public async setup(): Promise<void> {
 		this.logger.info(`executing: npm init @eslint/config@latest`);

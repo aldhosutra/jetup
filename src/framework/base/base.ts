@@ -9,11 +9,12 @@ import {
 } from '../../utils';
 import { ConfigModule } from '../config';
 import { LoggerModule } from '../logger';
-import { ModuleRegistry } from './registry';
+import { Constructor, ModuleRegistry } from './registry';
 
 export class BaseModule {
 	protected config!: ModuleConfig;
 	protected logger!: LoggerModule;
+	protected registry: Constructor | undefined;
 	protected autoInstallDeps = false;
 
 	public get name(): string {
@@ -21,7 +22,10 @@ export class BaseModule {
 		return name.charAt(0).toLowerCase() + name.substring(1);
 	}
 
-	constructor(registry: ModuleRegistry) {
+	public setRegistry(registry: ModuleRegistry) {
+		if (!this.registry) throw new Error(`${this.name}.registry is not configured`);
+		registry.register(this.registry, this);
+
 		const configModule = registry.get(ConfigModule);
 		const config = configModule.get(this.name);
 

@@ -1,4 +1,4 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import {
 	changeFilePermission,
 	createOrReplaceFile,
@@ -10,11 +10,7 @@ import {
 
 export class HuskyModule extends BaseModule {
 	protected autoInstallDeps = true;
-
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(HuskyModule, this);
-	}
+	protected registry = HuskyModule;
 
 	public async setup(): Promise<void> {
 		if (!isFolderExists(cwd('.husky'))) {

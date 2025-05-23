@@ -1,11 +1,8 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import { cwd, isFileExists, runCommand } from '../../utils';
 
 export class ProjectModule extends BaseModule {
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(ProjectModule, this);
-	}
+	protected registry = ProjectModule;
 
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('package.json'))) {

@@ -1,13 +1,9 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import { createOrReplaceFile, cwd, isFileExists, readFile } from '../../utils';
 
 export class PrettierModule extends BaseModule {
 	protected autoInstallDeps = true;
-
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(PrettierModule, this);
-	}
+	protected registry = PrettierModule;
 
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('.prettierignore'))) {

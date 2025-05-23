@@ -1,11 +1,8 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import { createOrReplaceFile, cwd, isFileExists, readFile } from '../../utils';
 
 export class TypescriptModule extends BaseModule {
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(TypescriptModule, this);
-	}
+	protected registry = TypescriptModule;
 
 	public async setup(): Promise<void> {
 		if (!isFileExists(cwd('tsconfig.json'))) {

@@ -3,7 +3,7 @@ interface Module {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Constructor = new (...args: any) => Module;
+export type Constructor = new (...args: any) => Module;
 
 interface ModuleMap {
 	readonly size: number;

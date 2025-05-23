@@ -1,12 +1,8 @@
-import { ModuleRegistry } from '../base/registry';
 import { BaseNamedModule } from '../base/named';
 import config from './config';
 
 export class ConfigModule extends BaseNamedModule {
-	constructor(registry: ModuleRegistry) {
-		super();
-		registry.register(ConfigModule, this);
-	}
+	protected registry = ConfigModule;
 
 	public get(moduleName: string) {
 		if (!Object.keys(config).includes(moduleName)) {

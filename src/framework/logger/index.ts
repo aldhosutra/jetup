@@ -4,11 +4,11 @@ import { BaseNamedModule } from '../base/named';
 import { ConfigModule } from '../config';
 
 export class LoggerModule extends BaseNamedModule {
-	protected _logger: winston.Logger;
+	protected _logger!: winston.Logger;
+	protected registry = LoggerModule;
 
-	constructor(registry: ModuleRegistry) {
-		super();
-		registry.register(LoggerModule, this);
+	setRegistry(registry: ModuleRegistry) {
+		super.setRegistry(registry);
 
 		const configModule = registry.get(ConfigModule);
 		const config = configModule.get(this.name);

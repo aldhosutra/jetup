@@ -1,44 +1,39 @@
 import * as figlet from 'figlet';
 import { ConfigModule, LoggerModule, ModuleRegistry } from './framework';
-import {
-	EsLintModule,
-	HuskyModule,
-	JestModule,
-	LintStagedModule,
-	PackageModule,
-	PrettierModule,
-	ProjectModule,
-	SrcModule,
-	TypescriptModule,
-} from './modules';
+import { DefaultPresets } from './presets';
 
 export class TsSetupApp {
 	protected _moduleRegistry = new ModuleRegistry();
-	protected _configModule = new ConfigModule(this._moduleRegistry);
-	protected _logger = new LoggerModule(this._moduleRegistry);
+	protected _configModule = new ConfigModule();
+	protected _logger = new LoggerModule();
 
-	protected _modules = [
-		new ProjectModule(this._moduleRegistry),
-		new PackageModule(this._moduleRegistry),
-		new EsLintModule(this._moduleRegistry),
-		new HuskyModule(this._moduleRegistry),
-		new JestModule(this._moduleRegistry),
-		new LintStagedModule(this._moduleRegistry),
-		new PrettierModule(this._moduleRegistry),
-		new TypescriptModule(this._moduleRegistry),
-		new SrcModule(this._moduleRegistry),
-	];
+	protected _presets = [new DefaultPresets()];
 
 	public async run() {
+		this._configModule.setRegistry(this._moduleRegistry);
+		this._logger.setRegistry(this._moduleRegistry);
+
 		console.log(figlet.textSync('ts-setup'));
 
 		this._logger.info('starting ts-setup...');
+
+		// TODO: in the future version, presets can be specified on cli args
+		const selectedPresetName = 'default';
+
+		const presetsIndex = this._presets.findIndex(presets => presets.name === selectedPresetName);
+		if (presetsIndex === -1) throw new Error(`preset "${selectedPresetName}" not found`);
+
+		this._logger.info(`using preset: "${selectedPresetName}"...`);
+		const selectedPreset = this._presets[presetsIndex];
+
 		this._logger.info(
-			`running setup for following modules: [${this._modules.map(t => t.name).join(',')}]`,
+			`running setup for following modules: [${selectedPreset.modules.map(t => t.name).join(',')}]`,
 		);
 
-		for (const module of this._modules) {
+		for (const module of selectedPreset.modules) {
 			this._logger.info(`setting up "${module.name}" module...`);
+			module.setRegistry(this._moduleRegistry);
+
 			if (!(await module.isInstalled())) {
 				await module.installDeps();
 				await module.setup();

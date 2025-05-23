@@ -1,13 +1,9 @@
-import { BaseModule, ModuleRegistry } from '../../framework';
+import { BaseModule } from '../../framework';
 import { cwd, readFile, updateJson } from '../../utils';
 
 export class PackageModule extends BaseModule {
 	protected autoInstallDeps = true;
-
-	constructor(registry: ModuleRegistry) {
-		super(registry);
-		registry.register(PackageModule, this);
-	}
+	protected registry = PackageModule;
 
 	public async setup(): Promise<void> {
 		const newJson = JSON.parse(readFile(__dirname, './package.json'));
