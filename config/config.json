@@ -1,7 +1,4 @@
 {
-	"logger": {
-		"level": "info"
-	},
 	"esLint": {
 		"installedIfDepsExists": ["@eslint/js", "eslint", "typescript-eslint"],
 		"installedIfFilesOrFoldersExists": ["eslint.config.mjs"]

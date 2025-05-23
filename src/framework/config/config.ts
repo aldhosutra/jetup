@@ -4,4 +4,12 @@ import * as appConfig from '../../../config/config.json';
 
 config();
 
-export default merge({}, appConfig, {});
+export default merge(
+	{
+		logger: {
+			level: 'info',
+		},
+	},
+	appConfig,
+	{},
+);
