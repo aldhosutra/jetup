@@ -13,7 +13,7 @@ interface Logger {
 
 export class LoggerModule extends BaseNamedModule {
 	protected _logger!: Logger;
-	protected _spinner!: Spinner & { debug?: (message: string) => void };
+	protected _spinner!: (Spinner & { debug?: (message: string) => void }) | undefined;
 	protected registry = LoggerModule;
 	protected verbose = false;
 
@@ -76,8 +76,9 @@ export class LoggerModule extends BaseNamedModule {
 	}
 
 	public end(text?: string) {
-		if (!this.verbose) {
+		if (!this.verbose && this._spinner) {
 			this._spinner.success({ text });
+			this._spinner = undefined;
 		} else {
 			this.info(text);
 		}

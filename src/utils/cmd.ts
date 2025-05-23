@@ -95,17 +95,17 @@ export async function runCommandInAlternateScreen(command: string): Promise<void
 	});
 }
 
-export function enterAlternateScreen(params: { title?: string; header?: string }) {
+function enterAlternateScreen(params: { title?: string; header?: string }) {
 	process.stdout.write('\x1b[?1049h');
 	if (params.title) setTerminalTitle(params.title);
 	if (params.header) drawBoxedTitle(params.header);
 }
 
-export function exitAlternateScreen() {
+function exitAlternateScreen() {
 	process.stdout.write('\x1b[?1049l');
 }
 
-export function setTerminalTitle(title: string) {
+function setTerminalTitle(title: string) {
 	process.stdout.write(`\x1b]0;${title}\x07`);
 }
 
