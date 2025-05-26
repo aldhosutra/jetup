@@ -1,2 +1,3 @@
-# ts-setup
-Set up a (TypeScript + ESLint + Prettier + Husky + Lint-Staged + Jest) project by running one command.
+# Jetup
+
+Jetup: JavaScript Project Setup! Jetting-up your next JS project in seconds with one command, using fully modular, customizable presets, instantly ready to code!

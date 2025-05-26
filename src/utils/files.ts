@@ -189,7 +189,7 @@ export function changeFilePermission(filePath: string, permission: Mode): void {
 /**
  * Resolves a sequence of path segments relative to the user's current working directory.
  *
- * When your CLI runs via `npx ts-setup`, __dirname points into the package's folder.
+ * When your CLI runs via `npx jetup`, __dirname points into the package's folder.
  * Use this helper to build paths against the project root where the user invoked the command.
  *
  * @param segments - One or more path segments under the user's working directory.

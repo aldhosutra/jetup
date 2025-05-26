@@ -1,9 +1,9 @@
 {
-	"name": "ts-setup",
+	"name": "jetup",
 	"version": "0.0.1",
-	"description": "Set up a (TypeScript + ESLint + Prettier + Husky + Lint-Staged + Jest) project by running one command.",
+	"description": "Jetup: JavaScript Project Setup! Jetting-up your next JS project in seconds with one command, using fully modular, customizable presets, instantly ready to code!.",
 	"bin": {
-		"ts-setup": "dist/index.js"
+		"jetup": "dist/index.js"
 	},
 	"files": [
 		"config",
@@ -28,30 +28,33 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/aldhosutra/ts-setup.git"
+		"url": "git+https://github.com/aldhosutra/jetup.git"
 	},
 	"keywords": [
-		"typescript",
-		"eslint",
-		"prettier",
-		"husky",
-		"lint-staged",
-		"jest",
-		"ts-jest",
 		"boilerplate",
-		"cli",
-		"scaffold",
 		"bootstrap",
+		"cli",
+		"code-generator",
 		"developer-tooling",
+		"init",
+		"javascript",
+		"modular",
 		"npx",
-		"setup"
+		"preset",
+		"project-generator",
+		"project-setup",
+		"scaffold",
+		"setup",
+		"setup-tool",
+		"starter-kit",
+		"template"
 	],
 	"author": "aldhosutra",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/aldhosutra/ts-setup/issues"
+		"url": "https://github.com/aldhosutra/jetup/issues"
 	},
-	"homepage": "https://github.com/aldhosutra/ts-setup#readme",
+	"homepage": "https://github.com/aldhosutra/jetup#readme",
 	"overrides": {
 		"glob": "10.4.5"
 	},

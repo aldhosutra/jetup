@@ -13,10 +13,10 @@ export class TsSetupApp {
 		this._configModule.setRegistry(this._moduleRegistry);
 		this._logger.setRegistry(this._moduleRegistry);
 
-		console.log(figlet.textSync('ts-setup'));
+		console.log(figlet.textSync('jetup'));
 		console.log();
 
-		this._logger.start('starting ts-setup...');
+		this._logger.start('starting jetup...');
 
 		// TODO: in the future version, presets can be specified on cli args
 		const selectedPresetName = 'default';
@@ -43,8 +43,8 @@ export class TsSetupApp {
 		}
 
 		this._logger.info('');
-		this._logger.info(`ts-setup completed!`);
+		this._logger.info(`jetup completed!`);
 		this._logger.info(`please give this project a star!`);
-		this._logger.info(`https://github.com/aldhosutra/ts-setup`);
+		this._logger.info(`https://github.com/aldhosutra/jetup`);
 	}
 }
