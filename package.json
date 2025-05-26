@@ -75,6 +75,7 @@
 		"typescript-eslint": "^8.32.1"
 	},
 	"dependencies": {
+		"commander": "^13.1.0",
 		"dotenv": "^16.5.0",
 		"figlet": "^1.8.1",
 		"lodash.merge": "^4.6.2",
