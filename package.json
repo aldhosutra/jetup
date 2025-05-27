@@ -15,7 +15,7 @@
 	],
 	"preferGlobal": true,
 	"scripts": {
-		"clean": "if test junit.xml; then rm junit.xml; fi; if test -d dist; then rm -r dist; fi; if test -d typedoc; then rm -r typedoc; fi; if test -d coverage; then rm -r coverage; fi; rm -rf node_modules; rm -f tsconfig.tsbuildinfo; rm -f npm-shrinkwrap.json",
+		"clean": "node ./lib/clean.js",
 		"lint": "eslint --ext .ts .",
 		"lint:fix": "eslint --fix --ext .js,.ts .",
 		"format": "prettier --write '**/*'",
@@ -69,6 +69,7 @@
 		"jest-junit": "^16.0.0",
 		"lint-staged": "^15.5.2",
 		"prettier": "3.5.3",
+		"shelljs": "^0.10.0",
 		"ts-jest": "^29.3.4",
 		"tslib": "^2.8.1",
 		"typescript": "^5.8.3",
