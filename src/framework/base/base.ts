@@ -27,7 +27,7 @@ export class BaseModule {
 		registry.register(this.registry, this);
 
 		const configModule = registry.get(ConfigModule);
-		const config = configModule.get(this.name);
+		const config = configModule.get<ModuleConfig>(this.name);
 
 		this.config = config;
 

@@ -21,7 +21,7 @@ export class LoggerModule extends BaseNamedModule {
 		super.setRegistry(registry);
 
 		const configModule = registry.get(ConfigModule);
-		const config = configModule.get(this.name);
+		const config = configModule.get<{ verbose: boolean }>(this.name);
 		this.verbose = config.verbose;
 
 		if (this.verbose) {

@@ -16,18 +16,19 @@ export class JetupApp {
 	protected _selectedPreset!: BasePresets;
 
 	public async init() {
-		this._configModule.setRegistry(this._moduleRegistry);
-		this._logger.setRegistry(this._moduleRegistry);
-
 		this._program
 			.name(packageJson.name.charAt(0).toUpperCase() + packageJson.name.substring(1))
 			.description(packageJson.description)
 			.version(packageJson.version);
 
 		this._program
+			.addArgument(
+				new Argument('[location]', 'Project location (default: current directory)').default('.'),
+			)
 			.addArgument(new Argument('[preset]', 'Jetup preset to use (default: "ts")').default('ts'))
+			.addOption(new Option('--preset <presetName>', 'Override preset to use'))
 			.addOption(new Option('-c, --config <path>', 'Path to config file').env('JETUP_CONFIG'))
-			.action(this._parsePreset.bind(this));
+			.action(this._parseArgument.bind(this));
 
 		this._program.addHelpText(
 			'after',
@@ -52,6 +53,9 @@ Please give Jetup a Star!:
 			process.exitCode = 1;
 			process.exit();
 		}
+
+		this._configModule.setRegistry(this._moduleRegistry);
+		this._logger.setRegistry(this._moduleRegistry);
 	}
 
 	public async run() {
@@ -69,11 +73,22 @@ Please give Jetup a Star!:
 		}
 	}
 
-	private _parsePreset(selectedPresetName: string) {
-		const presetsIndex = this._presets.findIndex(presets => presets.name === selectedPresetName);
-		if (presetsIndex === -1) throw new Error(`preset "${selectedPresetName}" not found`);
+	private _parseArgument(_location: string, selectedPresetName: string, options: OptionValues) {
+		if (options.config) this._configModule.setConfigFile(options.config);
 
-		this._selectedPreset = this._presets[presetsIndex];
+		if (selectedPresetName && options.preset && selectedPresetName !== options.preset) {
+			this._logger.warn(
+				`Both positional preset "${selectedPresetName}" and --preset "${options.preset}" provided. Using --preset.`,
+			);
+		}
+
+		const presetName = options.preset || selectedPresetName || 'ts';
+		// const projectLocation = location || '.';
+
+		const preset = this._presets.find(p => p.name === presetName);
+		if (!preset) throw new Error(`Preset "${presetName}" not found`);
+
+		this._selectedPreset = preset;
 	}
 
 	private async _runHandler() {
