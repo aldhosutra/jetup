@@ -14,12 +14,17 @@ import { Constructor, ModuleRegistry } from './registry';
 export class BaseModule {
 	protected config!: ModuleConfig;
 	protected logger!: LoggerModule;
+	protected cwd: string = cwd();
 	protected registry: Constructor | undefined;
 	protected autoInstallDeps = false;
 
 	public get name(): string {
 		const name = this.constructor.name.replace('Module', '');
 		return name.charAt(0).toLowerCase() + name.substring(1);
+	}
+
+	public setCWD(cwd: string) {
+		this.cwd = cwd;
 	}
 
 	public setRegistry(registry: ModuleRegistry) {

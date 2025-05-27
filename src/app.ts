@@ -1,9 +1,12 @@
 import * as figlet from 'figlet';
+import { mkdirSync } from 'fs';
 import { Argument, Command, Option, OptionValues } from 'commander';
 import { ConfigModule, LoggerModule, ModuleRegistry } from './framework';
 import { TsPresets } from './presets';
 import * as packageJson from '../package.json';
 import { BasePresets } from './presets/base';
+import { cwd, isFolderExists } from './utils';
+import { CWD } from './utils/cwd';
 
 export class JetupApp {
 	protected _moduleRegistry = new ModuleRegistry();
@@ -73,9 +76,14 @@ Please give Jetup a Star!:
 		}
 	}
 
-	private _parseArgument(_location: string, selectedPresetName: string, options: OptionValues) {
+	private _parseArgument(location: string, selectedPresetName: string, options: OptionValues) {
 		if (options.config) this._configModule.setConfigFile(options.config);
 
+		this._parsePreset(selectedPresetName, options);
+		this._parseLocation(location);
+	}
+
+	private _parsePreset(selectedPresetName: string, options: OptionValues) {
 		if (selectedPresetName && options.preset && selectedPresetName !== options.preset) {
 			this._logger.warn(
 				`Both positional preset "${selectedPresetName}" and --preset "${options.preset}" provided. Using --preset.`,
@@ -83,12 +91,25 @@ Please give Jetup a Star!:
 		}
 
 		const presetName = options.preset || selectedPresetName || 'ts';
-		// const projectLocation = location || '.';
 
 		const preset = this._presets.find(p => p.name === presetName);
 		if (!preset) throw new Error(`Preset "${presetName}" not found`);
 
 		this._selectedPreset = preset;
+	}
+
+	private _parseLocation(location: string) {
+		const projectLocation = location || '.';
+		if (projectLocation === '.') return;
+
+		const cwdValue = cwd(projectLocation);
+		if (!isFolderExists(cwdValue)) mkdirSync(cwdValue);
+
+		CWD.setValue(projectLocation);
+
+		for (const module of this._selectedPreset.modules) {
+			module.setCWD(projectLocation);
+		}
 	}
 
 	private async _runHandler() {

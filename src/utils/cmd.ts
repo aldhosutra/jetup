@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import { CWD } from './cwd';
 
 /**
  * Runs a shell command asynchronously with support for interactive input/output.
@@ -14,6 +15,7 @@ export async function runCommand(command: string): Promise<void> {
 		const child = spawn(cmd, args, {
 			stdio: 'inherit', // Connects stdin, stdout, stderr to parent process
 			shell: true, // Runs the command through the shell
+			cwd: CWD.value,
 		});
 
 		child.on('error', err => {
@@ -44,6 +46,7 @@ export async function runCommandInSilent(command: string): Promise<void> {
 
 		const child = spawn(cmd, args, {
 			stdio: 'ignore',
+			cwd: CWD.value,
 		});
 
 		child.on('error', err => {
@@ -76,6 +79,7 @@ export async function runCommandInAlternateScreen(command: string): Promise<void
 		const child = spawn(cmd, args, {
 			stdio: 'inherit', // Connects stdin, stdout, stderr to parent process
 			shell: true, // Runs the command through the shell
+			cwd: CWD.value,
 		});
 
 		child.on('error', err => {

@@ -2,6 +2,7 @@ import { mkdir, writeFile, rm } from 'fs/promises';
 import { existsSync, readFileSync, statSync, chmodSync, Mode } from 'fs';
 import { sync as globSync } from 'glob';
 import { join, dirname, resolve } from 'path';
+import { CWD } from './cwd';
 
 /**
  * Deletes an existing directory (if any), recreates it,
@@ -200,5 +201,5 @@ export function changeFilePermission(filePath: string, permission: Mode): void {
  * const configDir = cwd('src', 'config');
  */
 export function cwd(...segments: string[]): string {
-	return resolve(process.cwd(), ...segments);
+	return resolve(CWD.value, ...segments);
 }
