@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-import { TsSetupApp } from './app';
+import { JetupApp } from './app';
 
 async function main() {
-	const app = new TsSetupApp();
+	const app = new JetupApp();
+	await app.init();
 	await app.run();
 }
 

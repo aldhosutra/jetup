@@ -54,7 +54,7 @@
 	"bugs": {
 		"url": "https://github.com/aldhosutra/jetup/issues"
 	},
-	"homepage": "https://github.com/aldhosutra/jetup#readme",
+	"homepage": "https://jetup.js.org",
 	"overrides": {
 		"glob": "10.4.5"
 	},

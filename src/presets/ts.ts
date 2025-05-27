@@ -11,7 +11,7 @@ import {
 } from '../modules';
 import { BasePresets } from './base';
 
-export class DefaultPresets extends BasePresets {
+export class TsPresets extends BasePresets {
 	public modules = [
 		new ProjectModule(),
 		new PackageModule(),
