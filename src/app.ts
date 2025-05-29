@@ -14,6 +14,7 @@ export class JetupApp {
 	protected _logger = new LoggerModule();
 	protected _program = new Command();
 	protected _options!: OptionValues;
+	protected _footer = `\nPlease give Jetup a star, and visit our website!:\n   ${packageJson.repository.url.replace('.git', '').replace('git+', '')}\n   ${packageJson.homepage}`;
 
 	protected _presets = [new TsPresets()];
 	protected _selectedPreset!: BasePresets;
@@ -40,12 +41,7 @@ Example call:
    $ npx jetup`,
 		);
 
-		this._program.addHelpText(
-			'afterAll',
-			`
-Please give Jetup a Star!:
-   ${packageJson.homepage}`,
-		);
+		this._program.addHelpText('afterAll', this._footer);
 
 		try {
 			this._program.parse(process.argv);
@@ -136,9 +132,7 @@ Please give Jetup a Star!:
 	}
 
 	private _printFooter() {
-		console.log('\nPlease give Jetup a star, and visit our website!:');
-		console.log(`   ${packageJson.repository.url.replace('.git', '').replace('git+', '')}`);
-		console.log(`   ${packageJson.homepage}`);
+		console.log(this._footer);
 		console.log('');
 	}
 }
