@@ -1,6 +1,6 @@
 {
 	"name": "jetup",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Jetup: JavaScript Project Setup! Jetting-up your next JS project in seconds with one command, using fully modular, customizable presets, instantly ready to code!.",
 	"bin": {
 		"jetup": "dist/index.js"
@@ -78,6 +78,7 @@
 		"commander": "^13.1.0",
 		"dotenv": "^16.5.0",
 		"figlet": "^1.8.1",
+		"glob": "10.4.5",
 		"lodash.merge": "^4.6.2",
 		"nanospinner": "^1.2.2",
 		"tslib": "^2.8.1",
