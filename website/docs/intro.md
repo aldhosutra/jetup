@@ -2,46 +2,57 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+![Header](https://raw.githubusercontent.com/aldhosutra/jetup/HEAD/website/static/img/docusaurus-social-card.jpg)
 
-Let's discover **Docusaurus in less than 5 minutes**.
+# Jetup
 
-## Getting Started
+![Repo Size](https://img.shields.io/github/repo-size/aldhosutra/jetup)
+[![License: MIT](https://img.shields.io/github/license/aldhosutra/jetup?color=green)](https://opensource.org/license/mit)
 
-Get started by **creating a new site**.
+Jetup: JavaScript Project Setup! Jetting-up your next JS project in seconds with one command, using fully modular, customizable presets, instantly ready to code!
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### Usage
 
-### What you'll need
+Scaffold a new project in the current directory using the default preset:
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
+```sh
+npx jetup
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+Scaffold a new project `my-app` with preset `ts`:
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+```sh
+npx jetup my-app ts
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+Use a custom config file:
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+```sh
+npx jetup -c ./myconfig.json
+```
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+All available arguments and options:
+
+```
+jetup [options] [location] [preset]
+
+Arguments:
+  location               Project location (default: current directory) (default: ".")
+  preset                 Jetup preset to use (default: "ts") (default: "ts")
+
+Options:
+  -V, --version          output the version number
+  --preset <presetName>  Override preset to use
+  -c, --config <path>    Path to config file (env: JETUP_CONFIG)
+  -h, --help             display help for command
+```
+
+## License
+
+MIT
+
+## Links
+
+- [GitHub Repository](https://github.com/aldhosutra/jetup)
+- [Documentation](https://jetup.js.org)
+- [Report Issues](https://github.com/aldhosutra/jetup/issues)

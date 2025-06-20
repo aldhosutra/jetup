@@ -1,4 +1,9 @@
+![Header](https://raw.githubusercontent.com/aldhosutra/jetup/HEAD/website/static/img/docusaurus-social-card.jpg)
+
 # Jetup
+
+![Repo Size](https://img.shields.io/github/repo-size/aldhosutra/jetup)
+[![License: MIT](https://img.shields.io/github/license/aldhosutra/jetup?color=green)](https://opensource.org/license/mit)
 
 Jetup: JavaScript Project Setup! Jetting-up your next JS project in seconds with one command, using fully modular, customizable presets, instantly ready to code!
 
