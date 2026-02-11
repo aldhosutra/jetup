@@ -1,6 +1,6 @@
 {
 	"name": "jetup",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Jetup: JavaScript Project Setup! Jetting-up your next JS project in seconds with one command, using fully modular, customizable presets, instantly ready to code!.",
 	"bin": {
 		"jetup": "dist/index.js"
