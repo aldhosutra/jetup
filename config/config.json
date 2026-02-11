@@ -32,6 +32,7 @@
 			"ts-jest",
 			"tslib",
 			"typescript",
+			"tsc-alias",
 			"typescript-eslint"
 		],
 		"installedIfFilesOrFoldersExists": []

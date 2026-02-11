@@ -1,5 +1,9 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@src/*": ["./src/*"]
+		},
 		"forceConsistentCasingInFileNames": true,
 		"target": "es2019",
 		"module": "commonjs",
